@@ -25,12 +25,13 @@ Simple thermostate simulation. The application simulates the behaviour of a ther
    make
    ```
   
-  <h2>Usage<h2>
-    Run the executable:
+<h2>Usage<h2>
+Run the executable:
     
-   ```sh
-   ./thermostate 
-   ```
-    
- <h2>Class diagram<h2>
+ ```sh
+  ./thermostate 
+  ```
+
+  
+<h2>Class diagram<h2>
   <img src="pic/thermostate.drawio.png" alt="Logo" width="480" height="380">
