@@ -15,7 +15,7 @@ In case of modifications to the temperature admited range the thermostat will st
 1. Clone the repo
    
   ```sh
-   git clone https://github.com/xgrozasergiu/thermostate.git
+  git clone https://github.com/xgrozasergiu/thermostate.git
    ```
   
 2. Create build folder
@@ -29,15 +29,15 @@ In case of modifications to the temperature admited range the thermostat will st
 3. Build using Cmake
   
   ```sh
-   cmake ..
-   make
+  cmake ..
+  make
    ```
   
 <h2>Usage<h2>
 Run the executable:
     
  ```sh
-  ./thermostate 
+ ./thermostate 
   ```
 
   
