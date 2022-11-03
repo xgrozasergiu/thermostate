@@ -7,5 +7,30 @@ Simple thermostate simulation. The application simulates the behaviour of a ther
 1. Clone the repo
    
   ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/xgrozasergiu/thermostate.git
    ```
+  
+2. Create build folder
+  
+  ```sh
+  cd thermostate
+  mkdir build
+  cd build
+  ```
+  
+3. Build using Cmake
+  
+  ```sh
+   cmake ..
+   make
+   ```
+  
+  <h2>Usage<h2>
+    Run the executable:
+    
+   ```sh
+   ./thermostate 
+   ```
+    
+ <h2>Class diagram<h2>
+  <img src="pic/thermostate.drawio.png" alt="Logo" width="480" height="380">
