@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include "include/thermostate/thermostate_controller.h"
+#include "include/thermostate/temperature.h"
 
 struct ThermostateTest : testing::Test
 {
@@ -48,10 +49,48 @@ TEST_F(ThermostateTest,ThermostateSetMinFalse)
 
 TEST_F(ThermostateTest,ThermostateSetTemp)
 {
-    thermo->set_temperature(30.f);
+    thermo->set_limit_min(30.f);
     EXPECT_EQ(30.f,thermo->get_temperature());
 }
 
+TEST_F(ThermostateTest,ThermostateSetTemp)
+{
+    thermo->set_limit_max(20.f);
+    EXPECT_EQ(20.f,thermo->get_temperature());
+}
+
+struct TemperatureTest : testing::Test
+{
+    temperature* temp;
+
+    TemperatureTest()
+    {
+        temp = new temperature_celsius(21.f);
+    }
+
+    ~TemperatureTest()
+    {
+        delete temp;
+    }
+};
+
+TEST_F(TemperatureTest,TemperatureSetTemp)
+{
+    temp->set_temperature(20.f);
+    EXPECT_EQ(20.f,temp->get_temperature());
+}
+
+TEST_F(TemperatureTest,TemperatureHeatTemp)
+{
+    temp->heat_temperature(22.f);
+    EXPECT_EQ(22.f,temp->get_temperature());
+}
+
+TEST_F(TemperatureTest,TemperatureCoolTemp)
+{
+    temp->cool_temperature(20.f);
+    EXPECT_EQ(20.f,temp->get_temperature());
+}
 
 int main(int argc, char* argv[])
 {
