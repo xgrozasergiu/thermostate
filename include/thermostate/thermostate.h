@@ -1,6 +1,11 @@
+#ifndef THERMOSTATE_H
+#define THERMOSTATE_H
+
 #include <iostream>
-#include <thread>
 #include <string>
+#include "temperature_device.h"
+#include "temperature.h"
+#include "temperature_celsius.h"
 
 enum State
 {
@@ -15,25 +20,24 @@ struct limits
     float min;
 };
 
-class thermostate
+class thermostate : public temperature_device
 {
 private:
     limits limits;
     bool initialized;
-    float temperature;
     State thermostate_state;
 
-    void heat_temp();
-    void cool_temp();
+protected:
+    std::shared_ptr<temperature_celsius> temp;
 
 public:
     bool set_limit_max(float max);
     bool set_limit_min(float min);
-    float get_temperature();
-    void set_temperature(float temp);
     void check_temperature();
+    float get_temperature();
     State get_thernostate_state();
     std::string get_state();
     thermostate(float min, float max, float temp);
     ~thermostate() = default;
 };
+#endif

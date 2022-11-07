@@ -1,6 +1,6 @@
 #include "../include/thermostate/thermostate_controller.h"
 
-thermostate_controller::thermostate_controller(thermostate th) : thermo(th), thermostate_menu(front_menu)
+thermostate_controller::thermostate_controller(thermostate th) : thermo(std::make_unique<thermostate>(th)), thermostate_menu(front_menu)
 {
     system("clear");
 }
@@ -9,10 +9,10 @@ void thermostate_controller::display_menu()
 {
     std::cout << "Thermostate Menu" << std::endl;
 
-    if (thermo.get_thernostate_state() == State::stop)
+    if (thermo->get_thernostate_state() == State::stop)
     {
-        std::cout << "Temperature : " << thermo.get_temperature() << " degrees" << std::endl;
-        std::cout << thermo.get_state() << std::endl;
+        std::cout << "Temperature : " << thermo->get_temperature() << " degrees" << std::endl;
+        std::cout << thermo->get_state() << std::endl;
         std::cout << "" << std::endl;
 
         switch (thermostate_menu)
@@ -36,7 +36,7 @@ void thermostate_controller::display_menu()
         modify_menu();
     }
 
-    thermo.check_temperature();
+    thermo->check_temperature();
 
     system("clear");
 }
@@ -79,7 +79,7 @@ void thermostate_controller::modify_max_limit_menu()
     std::cout << "New maximum limit: ";
     std::cin >> max;
 
-    if (thermo.set_limit_max(max))
+    if (thermo->set_limit_max(max))
     {
         thermostate_menu = modify;
     }
@@ -95,7 +95,7 @@ void thermostate_controller::modify_min_limit_menu()
     std::cout << "New minimum limit: ";
     std::cin >> min;
 
-    if (thermo.set_limit_min(min))
+    if (thermo->set_limit_min(min))
     {
         thermostate_menu = modify;
     }
@@ -107,7 +107,7 @@ void thermostate_controller::modify_min_limit_menu()
 
 void thermostate_controller::modify_menu()
 {
-    std::cout << thermo.get_state() << std::endl;
+    std::cout << thermo->get_state() << std::endl;
     std::this_thread::sleep_for(std::chrono::seconds(3));
     thermostate_menu = front_menu;
 }

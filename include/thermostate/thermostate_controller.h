@@ -1,5 +1,12 @@
+#ifndef THERMOSTATE_CONTROLLER_H
+#define THERMOSTATE_CONTROLLER_H
+
+#include <thread>
 #include "thermostate.h"
-enum Menu{
+#include "temperature_device_controller.h"
+
+enum Menu
+{
     front_menu,
     modify_max_limit,
     modify_min_limit,
@@ -7,10 +14,10 @@ enum Menu{
     modify
 };
 
-class thermostate_controller
+class thermostate_controller : public temperature_device_controller
 {
 private:
-    thermostate thermo;
+    std::unique_ptr<thermostate> thermo;
     Menu thermostate_menu;
 
     void modify_menu();
@@ -28,5 +35,4 @@ public:
     void modify_max_limit_menu();
     bool get_close_menu_state();
 };
-
-
+#endif

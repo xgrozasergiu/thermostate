@@ -1,6 +1,6 @@
 #include "../include/thermostate/thermostate.h"
 
-thermostate::thermostate(float min, float max, float temp) : initialized(false), thermostate_state(stop), temperature(temp)
+thermostate::thermostate(float min, float max, float temp) : initialized(false), thermostate_state(stop), temp(std::make_shared<temperature_celsius>(temp))
 {
     if (min <= max)
     {
@@ -36,54 +36,24 @@ bool thermostate::set_limit_min(float min)
 
 void thermostate::check_temperature()
 {
-    if (temperature > limits.max)
+    if (temp->get_temperature() > limits.max)
     {
         thermostate_state = cool;
-        cool_temp();
+        temp->cool_temperature(limits.max);
     }
-    else if (temperature < limits.min)
+    else if (temp->get_temperature() < limits.min)
     {
         thermostate_state = heat;
-        heat_temp();
+        temp->heat_temperature(limits.max);
     }
     else
     {
         thermostate_state = stop;
     }
 }
-
-void thermostate::heat_temp()
-{
-    if (temperature < limits.min)
-    {
-        set_temperature(limits.min);
-    }
-    else
-    {
-        thermostate_state = stop;
-    }
-}
-
-void thermostate::cool_temp()
-{
-    if (temperature > limits.max)
-    {
-        set_temperature(limits.max);
-    }
-    else
-    {
-        thermostate_state = stop;
-    }
-}
-
 float thermostate::get_temperature()
 {
-    return temperature;
-}
-
-void thermostate::set_temperature(float temp)
-{
-    temperature = temp;
+    return temp->get_temperature();
 }
 
 State thermostate::get_thernostate_state()
