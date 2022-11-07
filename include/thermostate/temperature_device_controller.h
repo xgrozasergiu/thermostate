@@ -5,7 +5,7 @@
 class temperature_device_controller
 {
 private:
-    temperature_device *thermo;
+    std::unique_ptr<temperature_device> thermo;
 
     virtual void modify_menu() = 0;
 
